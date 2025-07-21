@@ -1,0 +1,50 @@
+### Arumon License
+
+**Version 1.0 (July 2025)**
+
+Copyright (c) 2025 Nities Seg
+
+Project: Arumon
+
+This license applies to the source code of "Arumon" and any associated documentation files provided within the project.
+
+**=== Permissions ===**
+
+Permission is hereby granted to programming learners and individuals assessing the author's skills, to view the source code of this project ("Arumon") for non-commercial, educational, or evaluative purposes only.
+
+Permission is also granted to programming learners to modify or alter the source code for personal, educational purposes on their local environment only.
+
+**=== Prohibitions ===**
+
+The following actions are strictly prohibited without explicit written permission from the author:
+
+1. Redistribution or publication of the source code, or any modified version thereof.
+2. Use of the source code for any commercial purposes.
+
+**=== Re-use and Incorporation ===**
+
+Re-use or incorporation of the code into other works is allowed only if all of the following conditions are met:
+
+1. The work is not a direct copy or superficial imitation of the original code.
+2. You have contacted the author at `segnities007@gmail.com` and obtained explicit written permission.
+3. Any authorized re-use or incorporation must include the original copyright notice and a copy of this entire license text.
+
+**=== Commercial License ===**
+
+If you wish to use this software for commercial purposes, please contact the author at `segnities007@gmail.com` to inquire about a separate commercial license.
+
+**=== Disclaimer of Warranty ===**
+
+THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+**=== License Modification ===**
+
+The author (Nities Seg) reserves the exclusive right to modify this license or release new versions. While you may be granted rights to the software under a specific version of this license, you do not have the right to alter the terms of the license itself.
+
+Permission is granted to copy and distribute verbatim copies of this license document, but changing it is not permitted.
+
+**=== Contact ===**
+
+Author: Nities Seg
+
+Email: `segnities007@gmail.com`

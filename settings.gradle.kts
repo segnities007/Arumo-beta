@@ -21,3 +21,18 @@ dependencyResolutionManagement {
 
 rootProject.name = "Arumo-beta"
 include(":app")
+include(":data:repository")
+include(":data:local")
+include(":data:remote")
+include(":domain:repository")
+include(":domain:usecase")
+include(":domain:model")
+include(":core:ui")
+include(":core:common")
+include(":core:navigation")
+include(":feature:home")
+include(":feature:dashboard")
+include(":feature:login")
+include(":feature:search")
+include(":feature:storage")
+include(":feature:setting")
