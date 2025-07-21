@@ -47,5 +47,8 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
 
+    //koin
+    implementation(libs.koin.core)
+
     implementation(libs.kotlinx.serialization.json)
 }
