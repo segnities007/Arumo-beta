@@ -1,6 +1,6 @@
 package com.segnities007.model.mvi
 
-sealed interface BaseMvi {
+interface BaseMvi {
     sealed interface State<out T> {
         data object Loading : State<Nothing>
 
