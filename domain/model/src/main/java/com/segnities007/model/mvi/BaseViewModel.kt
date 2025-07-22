@@ -10,16 +10,19 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+interface ViewState
+interface ViewIntent
+interface ViewEffect
+
 abstract class BaseViewModel<
-        T,
-        I : BaseMvi.Intent,
-        E : BaseMvi.Effect,
-        >(
-    initialViewState: T,
-) : ViewModel() {
-    private val _state = MutableStateFlow(initialViewState)
+    T, // State
+    I : ViewIntent,
+    E : ViewEffect,
+>(initialViewState: T) : ViewModel() {
+    protected val _state = MutableStateFlow(initialViewState)
     val state: StateFlow<T> = _state.asStateFlow()
-    private val _effect = MutableSharedFlow<E>()
+
+    protected val _effect = MutableSharedFlow<E>()
     val effect: SharedFlow<E> = _effect.asSharedFlow()
 
     protected abstract fun handleIntent(intent: I)
