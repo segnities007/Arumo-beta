@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.segnities007.model.User
 import com.segnities007.model.mvi.BaseMvi
 import com.segnities007.model.mvi.BaseViewModel
+import com.segnities007.model.mvi.ViewState
 import com.segnities007.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,6 +14,9 @@ import org.koin.core.component.inject
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
+internal data class Login(
+    val email: String = "",
+)
 class LoginViewModel :
     BaseViewModel<
         LoginState,

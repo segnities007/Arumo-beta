@@ -10,6 +10,13 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+sealed interface State{
+    data object Idle : State
+    data object Loading : State
+    data object Success: State
+    data class Error(val message: String) : State
+}
+
 interface ViewState
 interface ViewIntent
 interface ViewEffect
