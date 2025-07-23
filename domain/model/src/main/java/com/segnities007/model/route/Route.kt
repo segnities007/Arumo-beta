@@ -4,21 +4,15 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 sealed interface Route {
-    @Serializable
-    object Home : Route
+    @Serializable object Home : Route
 
-    @Serializable
-    object Search : Route
+    @Serializable object Search : Route
 
-    @Serializable
-    object Dashboard : Route
+    @Serializable object Dashboard : Route
 
-    @Serializable
-    object Setting : Route
+    @Serializable object Setting : Route
 
-    @Serializable
-    object Login : Route
+    @Serializable object Login : Route
 
-    @Serializable
-    object Storage : Route
+    @Serializable object Storage : Route
 }

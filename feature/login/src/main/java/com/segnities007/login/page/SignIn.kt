@@ -57,7 +57,7 @@ internal fun SignIn(
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = email,
-                onValueChange = {},
+                onValueChange = { email = it },
                 label = { Text(text = "Email") },
                 colors =
                     OutlinedTextFieldDefaults.colors(
@@ -70,7 +70,7 @@ internal fun SignIn(
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),
                 value = password,
-                onValueChange = {},
+                onValueChange = { password = it },
                 label = { Text(text = "Password") },
                 colors =
                     OutlinedTextFieldDefaults.colors(
