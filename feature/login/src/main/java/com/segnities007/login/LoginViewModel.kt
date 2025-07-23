@@ -60,7 +60,7 @@ class LoginViewModel :
     KoinComponent {
     private val userRepository: UserRepository by inject()
 
-    override fun handleIntent(intent: LoginIntent) {
+    public override fun handleIntent(intent: LoginIntent) {
         if (state.value.state !is State.Idle) return
         _state.value = state.value.copy(state = State.Loading)
 

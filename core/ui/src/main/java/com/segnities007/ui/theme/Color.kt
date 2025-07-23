@@ -1,4 +1,4 @@
-package com.segnities007.arumo_beta.ui.theme
+package com.segnities007.ui.theme
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush

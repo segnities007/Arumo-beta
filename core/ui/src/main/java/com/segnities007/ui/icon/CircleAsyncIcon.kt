@@ -1,4 +1,4 @@
-package com.segnities007.ui
+package com.segnities007.ui.icon
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -9,7 +9,7 @@ import androidx.compose.ui.draw.clip
 import coil3.compose.AsyncImage
 
 @Composable
-fun CircleIcon(
+fun CircleAsyncIcon(
     modifier: Modifier = Modifier,
     url: String,
     description: String,
