@@ -8,5 +8,5 @@ interface UserRepository {
 
     suspend fun deleteUser(user: User)
 
-    suspend fun getUser(): Flow<User>
+    fun getUser(): Flow<User>
 }

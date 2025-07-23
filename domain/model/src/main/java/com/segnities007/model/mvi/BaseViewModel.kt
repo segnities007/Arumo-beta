@@ -10,31 +10,40 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-sealed interface State{
+sealed interface State {
     data object Idle : State
+
     data object Loading : State
-    data object Success: State
-    data class Error(val message: String) : State
+
+    data object Success : State
+
+    data class Error(
+        val message: String,
+    ) : State
 }
 
 interface ViewState
+
 interface ViewIntent
+
 interface ViewEffect
 
 abstract class BaseViewModel<
-    T, // State
-    I : ViewIntent,
-    E : ViewEffect,
->(initialViewState: T) : ViewModel() {
+    State : ViewState,
+    Intent : ViewIntent,
+    Effect : ViewEffect,
+>(
+    initialViewState: State,
+) : ViewModel() {
     protected val _state = MutableStateFlow(initialViewState)
-    val state: StateFlow<T> = _state.asStateFlow()
+    val state: StateFlow<State> = _state.asStateFlow()
 
-    protected val _effect = MutableSharedFlow<E>()
-    val effect: SharedFlow<E> = _effect.asSharedFlow()
+    protected val _effect = MutableSharedFlow<Effect>()
+    val effect: SharedFlow<Effect> = _effect.asSharedFlow()
 
-    protected abstract fun handleIntent(intent: I)
+    protected abstract fun handleIntent(intent: Intent)
 
-    protected fun handleEffect(effect: E) {
+    protected fun handleEffect(effect: Effect) {
         viewModelScope.launch {
             _effect.emit(effect)
         }

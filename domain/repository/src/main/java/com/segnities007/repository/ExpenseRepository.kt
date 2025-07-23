@@ -8,7 +8,7 @@ interface ExpenseRepository {
 
     suspend fun deleteExpense(expense: Expense)
 
-    suspend fun getExpenseById(id: Int): Flow<Expense?>
+    fun getExpenseById(id: Int): Flow<Expense?>
 
-    suspend fun getExpenses(): Flow<List<Expense>>
+    fun getExpenses(): Flow<List<Expense>>
 }

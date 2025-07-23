@@ -1,6 +1,7 @@
 package com.segnities007.repository
 
 import com.segnities007.local.dao.UserDao
+import com.segnities007.local.dto.UserEntity
 import com.segnities007.model.User
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -14,12 +15,17 @@ class UserRepositoryImpl :
     private val userDao: UserDao by inject()
 
     override suspend fun upsertUser(user: User) {
-        userDao.upsert(user)
+        userDao.upsert(UserEntity.fromModel(user))
     }
 
     override suspend fun deleteUser(user: User) {
-        userDao.delete(user)
+        userDao.delete(UserEntity.fromModel(user))
     }
 
-    override suspend fun getUser(): Flow<User> = userDao.getUser().map { it.first() }
+    override fun getUser(): Flow<User>{
+        val result = userDao.getUser()
+        return result
+            .map { list -> list.first() }
+            .map { it.toModel() }
+    }
 }
