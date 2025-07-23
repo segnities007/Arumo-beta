@@ -2,15 +2,12 @@ package com.segnities007.local.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
-import com.segnities007.local.Converters
 import com.segnities007.local.dao.ExpenseDao
-import com.segnities007.model.Expense
+import com.segnities007.local.dto.ExpenseEntity
 
 private const val version = 1
 
-@Database(entities = [Expense::class], version = version)
-@TypeConverters(Converters::class)
+@Database(entities = [ExpenseEntity::class], version = version)
 abstract class ExpenseDatabase : RoomDatabase() {
     abstract fun expenseDao(): ExpenseDao
 }

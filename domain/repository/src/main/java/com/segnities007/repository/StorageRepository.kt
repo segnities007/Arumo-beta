@@ -8,7 +8,7 @@ interface StorageRepository {
 
     suspend fun deleteStorage(storage: Storage)
 
-    suspend fun getStorageById(id: String): Flow<Storage?>
+    fun getStorageById(id: String): Flow<Storage?>
 
-    suspend fun getStorages(): Flow<List<Storage>>
+    fun getStorages(): Flow<List<Storage>>
 }

@@ -8,7 +8,7 @@ interface ItemRepository {
 
     suspend fun deleteItem(item: Item)
 
-    suspend fun getItemById(id: Int): Flow<Item?>
+    fun getItemById(id: Int): Flow<Item?>
 
-    suspend fun getItems(): Flow<List<Item>>
+    fun getItems(): Flow<List<Item>>
 }
