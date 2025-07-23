@@ -1,5 +1,6 @@
 package com.segnities007.login
 
+import android.net.Uri
 import androidx.lifecycle.viewModelScope
 import com.segnities007.model.User
 import com.segnities007.model.mvi.BaseViewModel
@@ -7,6 +8,7 @@ import com.segnities007.model.mvi.State
 import com.segnities007.model.mvi.ViewEffect
 import com.segnities007.model.mvi.ViewIntent
 import com.segnities007.model.mvi.ViewState
+import com.segnities007.model.route.Route
 import com.segnities007.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,15 +18,11 @@ import org.koin.core.component.inject
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 
-data class Login(
+data class LoginState(
     val page: Int = 0,
     val name: String = "",
     val email: String = "",
     val password: String = "",
-)
-
-data class LoginState(
-    val data: Login = Login(),
     val state: State = State.Idle,
 ) : ViewState
 
@@ -33,6 +31,7 @@ sealed interface LoginIntent : ViewIntent {
         val name: String,
         val email: String,
         val password: String,
+        val uri: Uri?,
     ) : LoginIntent
 
     data class SignIn(
@@ -51,8 +50,8 @@ sealed interface LoginEffect : ViewEffect {
     ) : LoginEffect
 
     data class Navigation(
-        val page: Int,
-    ) : LoginEffect // TODO modify
+        val route: Route,
+    ) : LoginEffect
 }
 
 class LoginViewModel :
@@ -74,10 +73,7 @@ class LoginViewModel :
     private fun goToNextPage(intent: LoginIntent.GoToNextPage) {
         _state.value =
             state.value.copy(
-                data =
-                    state.value.data.copy(
-                        page = intent.nextPage,
-                    ),
+                page = intent.nextPage,
                 state = State.Success,
             )
         _state.value = state.value.copy(state = State.Idle)
@@ -93,7 +89,7 @@ class LoginViewModel :
                         .sha256()
                         .hex()
                 ) {
-                    _effect.emit(LoginEffect.Navigation(1)) // TODO Modify
+                    _effect.emit(LoginEffect.Navigation(Route.Storage))
                 }
             }
             _state.value = state.value.copy(state = State.Error("failed to sign in"))
@@ -119,7 +115,7 @@ class LoginViewModel :
         viewModelScope.launch(Dispatchers.IO) {
             userRepository.upsertUser(user)
             _state.value = state.value.copy(state = State.Success)
-            _effect.emit(LoginEffect.Navigation(1)) // Modify
+            _effect.emit(LoginEffect.Navigation(Route.Storage))
             _state.value = state.value.copy(state = State.Idle)
         }
     }

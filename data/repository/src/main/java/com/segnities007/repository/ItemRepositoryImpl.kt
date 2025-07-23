@@ -22,12 +22,12 @@ class ItemRepositoryImpl :
         itemDao.delete(ItemEntity.fromModel(item))
     }
 
-    override fun getItemById(id: Int): Flow<Item?>{
+    override fun getItemById(id: Int): Flow<Item?> {
         val result = itemDao.getItemById(id)
         return result.map { it?.toModel() }
     }
 
-    override fun getItems(): Flow<List<Item>>{
+    override fun getItems(): Flow<List<Item>> {
         val result = itemDao.getAllItems()
         return result.map { list -> list.map { it.toModel() } }
     }

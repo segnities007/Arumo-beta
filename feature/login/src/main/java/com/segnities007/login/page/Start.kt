@@ -22,52 +22,51 @@ import com.segnities007.ui.icon.CircleIcon
 import kotlinx.coroutines.launch
 
 @Composable
-fun Start(
-    onSlide: suspend (Int) -> Unit
-) {
+fun Start(onSlide: suspend (Int) -> Unit) {
     val coroutineScope = rememberCoroutineScope()
 
-        Column(
-            modifier = Modifier
+    Column(
+        modifier =
+            Modifier
                 .fillMaxSize()
                 .padding(32.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Spacer(modifier = Modifier.weight(1f))
-            CircleIcon(
-                painter = painterResource(R.drawable.cardboard)
-            )
-            Spacer(modifier = Modifier.height(32.dp))
-            Text(
-                text = "Arumo",
-                fontSize = 48.sp,
-            )
-            Spacer(modifier = Modifier.height(64.dp))
-            RoundedCornerButton(
-                modifier = Modifier.fillMaxWidth(),
-                text = "Sign Up",
-                onClick = {
-                    coroutineScope.launch {
-                        onSlide(1)
-                    }
-                },
-            )
-            Spacer(modifier = Modifier.height(32.dp))
-            RoundedCornerButton(
-                modifier = Modifier.fillMaxWidth(),
-                text = "Sign In",
-                onClick = {
-                    coroutineScope.launch {
-                        onSlide(2)
-                    }
-                },
-            )
-            Spacer(modifier = Modifier.weight(1f))
-        }
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Spacer(modifier = Modifier.weight(1f))
+        CircleIcon(
+            painter = painterResource(R.drawable.cardboard),
+        )
+        Spacer(modifier = Modifier.height(32.dp))
+        Text(
+            text = "Arumo",
+            fontSize = 48.sp,
+        )
+        Spacer(modifier = Modifier.height(64.dp))
+        RoundedCornerButton(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Sign Up",
+            onClick = {
+                coroutineScope.launch {
+                    onSlide(1)
+                }
+            },
+        )
+        Spacer(modifier = Modifier.height(32.dp))
+        RoundedCornerButton(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Sign In",
+            onClick = {
+                coroutineScope.launch {
+                    onSlide(2)
+                }
+            },
+        )
+        Spacer(modifier = Modifier.weight(1f))
+    }
 }
 
 @Composable
 @Preview(showBackground = true, apiLevel = 35)
-private fun StartPreview(){
-    Start {  }
+private fun StartPreview() {
+    Start { }
 }

@@ -40,17 +40,18 @@ internal fun SignIn(
     var password by remember { mutableStateOf("") }
     val coroutineScope = rememberCoroutineScope()
 
-    Box{
+    Box {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 32.dp),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 32.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top,
         ) {
             Spacer(modifier = Modifier.weight(0.5f))
             CircleIcon(
-                painter = painterResource(R.drawable.cardboard)
+                painter = painterResource(R.drawable.cardboard),
             )
             Spacer(modifier = Modifier.height(64.dp))
             OutlinedTextField(
@@ -58,11 +59,12 @@ internal fun SignIn(
                 value = email,
                 onValueChange = {},
                 label = { Text(text = "Email") },
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = MaterialTheme.colorScheme.surface,
-                    unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-                    disabledContainerColor = MaterialTheme.colorScheme.surface,
-                )
+                colors =
+                    OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = MaterialTheme.colorScheme.surface,
+                        unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+                        disabledContainerColor = MaterialTheme.colorScheme.surface,
+                    ),
             )
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedTextField(
@@ -70,34 +72,37 @@ internal fun SignIn(
                 value = password,
                 onValueChange = {},
                 label = { Text(text = "Password") },
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedContainerColor = MaterialTheme.colorScheme.surface,
-                    unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-                    disabledContainerColor = MaterialTheme.colorScheme.surface,
-                )
+                colors =
+                    OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor = MaterialTheme.colorScheme.surface,
+                        unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+                        disabledContainerColor = MaterialTheme.colorScheme.surface,
+                    ),
             )
             Spacer(modifier = Modifier.height(64.dp))
             RoundedCornerButton(
                 modifier = Modifier.fillMaxWidth(),
-                text = "Sign Up",
+                text = "Sign In",
                 onClick = {
-                    onIntent(LoginIntent.SignIn(
-                        email = email,
-                        password = password
-                    ))
+                    onIntent(
+                        LoginIntent.SignIn(
+                            email = email,
+                            password = password,
+                        ),
+                    )
                 },
             )
             Spacer(modifier = Modifier.weight(1f))
         }
         Text(
-            modifier = Modifier
-                .padding(bottom = 32.dp)
-                .clickable {
-                    coroutineScope.launch {
-                        onSlide(0)
-                    }
-                }
-                .align(Alignment.BottomCenter),
+            modifier =
+                Modifier
+                    .padding(bottom = 32.dp)
+                    .clickable {
+                        coroutineScope.launch {
+                            onSlide(0)
+                        }
+                    }.align(Alignment.BottomCenter),
             text = "Back to Start",
             fontSize = 16.sp,
         )
@@ -106,9 +111,9 @@ internal fun SignIn(
 
 @Composable
 @Preview(showBackground = true, apiLevel = 35)
-private fun SignInPreview(){
+private fun SignInPreview() {
     SignIn(
         onSlide = {},
-        onIntent = {}
+        onIntent = {},
     )
 }

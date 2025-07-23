@@ -15,48 +15,45 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.segnities007.login.LoginScreen
+import com.segnities007.model.route.Route
 import com.segnities007.ui.theme.backgroundBrush
 
 @Composable
-fun Navigation(){
+fun Navigation() {
     val navController = rememberNavController()
 
-    NavUi{
-        NavHost(navController = navController, startDestination = Route.Login){
-            composable<Route.Login>{
+    NavUi {
+        NavHost(navController = navController, startDestination = Route.Login) {
+            composable<Route.Login> {
                 LoginScreen(
-                    navigate = { navController.navigate(Route.Storage) },
-                    snackBar = {/*TODO*/}
+                    navigate = { navController.navigate(it) },
+                    snackBar = { /*TODO*/ },
                 )
             }
-            composable<Route.Storage>{
-
+            composable<Route.Storage> {
             }
-            composable<Route.Home>{
-
+            composable<Route.Home> {
             }
-            composable<Route.Search>{
-
+            composable<Route.Search> {
             }
-            composable<Route.Dashboard>{
-
+            composable<Route.Dashboard> {
             }
-            composable<Route.Setting>{
-
+            composable<Route.Setting> {
             }
         }
     }
 }
 
 @Composable
-private fun NavUi(
-    content: @Composable () -> Unit,
-){
-    Scaffold{
-        Box(modifier = Modifier
-            .fillMaxSize()
-            .background(backgroundBrush)
-            .padding(it)){
+private fun NavUi(content: @Composable () -> Unit) {
+    Scaffold {
+        Box(
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .background(backgroundBrush)
+                    .padding(it),
+        ) {
             content()
         }
     }

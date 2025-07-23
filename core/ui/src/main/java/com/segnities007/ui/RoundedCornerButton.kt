@@ -19,10 +19,11 @@ fun RoundedCornerButton(
     ElevatedButton(
         modifier = modifier,
         onClick = onClick,
-        contentPadding = PaddingValues(
-            horizontal = 24.dp,
-            vertical = 16.dp,
-        ),
+        contentPadding =
+            PaddingValues(
+                horizontal = 24.dp,
+                vertical = 16.dp,
+            ),
     ) {
         Text(
             text = text,

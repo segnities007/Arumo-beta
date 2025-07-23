@@ -15,7 +15,8 @@ val Pink40 = Color(0xFF7D5260)
 private val lightBlue = Color.Yellow.copy(alpha = 0.2f) // 青を50%の透明度に
 private val lightGreen = Color.Green.copy(alpha = 0.3f) // 緑を50%の透明度に
 
-val backgroundBrush = Brush.linearGradient(
-    colors = listOf(lightBlue, lightGreen),
-    start = Offset(0f, 0f),
-)
+val backgroundBrush =
+    Brush.linearGradient(
+        colors = listOf(lightBlue, lightGreen),
+        start = Offset(0f, 0f),
+    )

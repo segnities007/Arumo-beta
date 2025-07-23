@@ -17,6 +17,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,6 +32,7 @@ import androidx.compose.ui.unit.sp
 import com.segnities007.login.page.SignIn
 import com.segnities007.login.page.SignUp
 import com.segnities007.login.page.Start
+import com.segnities007.model.route.Route
 import com.segnities007.ui.R
 import com.segnities007.ui.RoundedCornerButton
 import com.segnities007.ui.icon.CircleIcon
@@ -42,30 +44,40 @@ private const val PAGE = 3
 
 @Composable
 fun LoginScreen(
-    navigate: () -> Unit,
+    navigate: (Route) -> Unit,
     snackBar: (String) -> Unit,
 ) {
     val pagerState = rememberPagerState(pageCount = { PAGE })
     val loginViewModel: LoginViewModel = koinViewModel()
+    val effect by loginViewModel.effect.collectAsState(initial = null)
 
-    LaunchedEffect(loginViewModel.effect) {
-        loginViewModel.effect.collect {
-            when (it) {
-                is LoginEffect.Navigation -> navigate()
-                is LoginEffect.SnackBar -> snackBar(it.message)
+    LaunchedEffect(effect) {
+        when (effect) {
+            is LoginEffect.Navigation -> {
+                navigate((effect as LoginEffect.Navigation).route)
             }
+            is LoginEffect.SnackBar -> snackBar((effect as LoginEffect.SnackBar).message)
+            null -> { /*nothing*/ }
         }
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
-        HorizontalPager(state = pagerState) { page ->
+        HorizontalPager(
+            state = pagerState,
+            userScrollEnabled = false,
+        ) { page ->
             when (page) {
-                0 -> Start(onSlide = pagerState::animateScrollToPage)
-                1 -> SignUp(onSlide = pagerState::animateScrollToPage)
-                2 -> SignIn(
-                    onSlide = pagerState::animateScrollToPage,
-                    onIntent = loginViewModel::handleIntent
-                )
+                0 -> Start(onSlide = pagerState::scrollToPage)
+                1 ->
+                    SignUp(
+                        onSlide = pagerState::scrollToPage,
+                        onIntent = loginViewModel::handleIntent,
+                    )
+                2 ->
+                    SignIn(
+                        onSlide = pagerState::scrollToPage,
+                        onIntent = loginViewModel::handleIntent,
+                    )
             }
         }
     }
@@ -74,10 +86,15 @@ fun LoginScreen(
 @Composable
 @Preview(showBackground = true, apiLevel = 35)
 private fun LoginScreenPreview() {
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(brush = backgroundBrush)
-    ){
-        SignUp {  }
+    Box(
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(brush = backgroundBrush),
+    ) {
+        SignUp(
+            onSlide = {},
+            onIntent = {},
+        )
     }
 }

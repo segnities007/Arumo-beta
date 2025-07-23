@@ -21,12 +21,12 @@ class ExpenseRepositoryImpl :
         expenseDao.delete(ExpenseEntity.fromModel(expense))
     }
 
-    override fun getExpenseById(id: Int): Flow<Expense?>{
+    override fun getExpenseById(id: Int): Flow<Expense?> {
         val result = expenseDao.getExpenseById(id)
         return result.map { it?.toModel() }
     }
 
-    override fun getExpenses(): Flow<List<Expense>>{
+    override fun getExpenses(): Flow<List<Expense>> {
         val result = expenseDao.getAllExpenses()
         return result.map { list -> list.map { it.toModel() } }
     }

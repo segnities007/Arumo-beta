@@ -33,7 +33,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:common"))
     implementation(project(":core:ui"))
     implementation(project(":domain:model"))
     implementation(project(":domain:repository"))
@@ -64,4 +63,7 @@ dependencies {
 
     // navigation
     implementation(libs.androidx.navigation.compose)
+
+    // coil
+    implementation(libs.coil.compose)
 }

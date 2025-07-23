@@ -22,7 +22,7 @@ class UserRepositoryImpl :
         userDao.delete(UserEntity.fromModel(user))
     }
 
-    override fun getUser(): Flow<User>{
+    override fun getUser(): Flow<User> {
         val result = userDao.getUser()
         return result
             .map { list -> list.first() }

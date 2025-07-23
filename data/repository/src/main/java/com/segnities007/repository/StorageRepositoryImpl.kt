@@ -22,12 +22,12 @@ class StorageRepositoryImpl :
         storageDao.delete(StorageEntity.fromModel(storage))
     }
 
-    override fun getStorageById(id: String): Flow<Storage?>{
+    override fun getStorageById(id: String): Flow<Storage?> {
         val result = storageDao.getStorageById(id)
         return result.map { it?.toModel() }
     }
 
-    override fun getStorages(): Flow<List<Storage>>{
+    override fun getStorages(): Flow<List<Storage>> {
         val result = storageDao.getAllStorages()
         return result.map { list -> list.map { it.toModel() } }
     }

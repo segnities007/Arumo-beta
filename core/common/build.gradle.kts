@@ -38,6 +38,7 @@ dependencies {
     implementation(project(":data:local"))
     implementation(project(":data:repository"))
     implementation(project(":domain:repository"))
+    implementation(project(":feature:login"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -48,6 +49,8 @@ dependencies {
 
     // koin
     implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
 
     // room
     implementation(libs.androidx.room.runtime)
