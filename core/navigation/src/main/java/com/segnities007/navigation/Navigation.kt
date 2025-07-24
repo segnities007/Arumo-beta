@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.segnities007.login.LoginScreen
 import com.segnities007.model.route.Route
+import com.segnities007.storage.StorageScreen
 import com.segnities007.ui.theme.backgroundBrush
 
 @Composable
@@ -19,7 +20,7 @@ fun Navigation() {
     val navController = rememberNavController()
 
     NavUi {
-        NavHost(navController = navController, startDestination = Route.Login) {
+        NavHost(navController = navController, startDestination = Route.Storage) {
             composable<Route.Login> {
                 LoginScreen(
                     navigate = { navController.navigate(it) },
@@ -27,6 +28,10 @@ fun Navigation() {
                 )
             }
             composable<Route.Storage> {
+                StorageScreen(
+                    navigate = { navController.navigate(it) },
+                    snackBar = { /*TODO*/ },
+                )
             }
             composable<Route.Home> {
             }

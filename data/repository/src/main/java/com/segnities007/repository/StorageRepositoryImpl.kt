@@ -14,8 +14,8 @@ class StorageRepositoryImpl :
     KoinComponent {
     private val storageDao: StorageDao by inject()
 
-    override suspend fun upsertStorage(storage: Storage) {
-        storageDao.upsert(StorageEntity.fromModel(storage))
+    override suspend fun createStorage(storage: Storage) {
+        storageDao.create(StorageEntity.fromModel(storage))
     }
 
     override suspend fun deleteStorage(storage: Storage) {

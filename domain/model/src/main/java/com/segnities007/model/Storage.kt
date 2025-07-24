@@ -1,5 +1,6 @@
 package com.segnities007.model
 
+import android.net.Uri
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
 import kotlin.time.Instant
@@ -10,6 +11,7 @@ data class Storage
         val id: String = "",
         val hostId: String = "",
         val name: String = "",
+        val iconUri: Uri? = null,
         val description: String = "",
         val itemIDs: List<Int> = emptyList(),
         val expenseIDs: List<Int> = emptyList(),
