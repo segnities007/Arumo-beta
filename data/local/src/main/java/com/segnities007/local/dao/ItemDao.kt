@@ -20,6 +20,12 @@ interface ItemDao {
     @Query("SELECT * FROM items WHERE id = :id")
     fun getItemById(id: Int): Flow<ItemEntity?>
 
+    @Query("SELECT * FROM items WHERE id >= :id ORDER BY id ASC LIMIT 20")
+    fun getRecentItemsFromId(id: Int): Flow<List<ItemEntity>>
+
+    @Query("SELECT * FROM items WHERE categoryName = :category AND id >= :id ORDER BY id ASC LIMIT 20")
+    fun getItemsByCategoryFromId(category: String, id: Int): Flow<List<ItemEntity>>
+
     @Query("SELECT * FROM items ORDER BY updateAtMillis DESC")
     fun getAllItems(): Flow<List<ItemEntity>>
 }

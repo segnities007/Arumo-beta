@@ -58,14 +58,11 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
 
-    // okio
-    implementation(libs.okio)
-
-    // navigation
-    implementation(libs.androidx.navigation.compose)
-
     // coil
     implementation(libs.coil.compose)
+
+    // okio
+    implementation(libs.okio)
 
     //preference data store
     implementation(libs.androidx.datastore.preferences)
