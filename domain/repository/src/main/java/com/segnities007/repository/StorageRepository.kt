@@ -4,11 +4,13 @@ import com.segnities007.model.Storage
 import kotlinx.coroutines.flow.Flow
 
 interface StorageRepository {
-    suspend fun upsertStorage(storage: Storage)
+    suspend fun createStorage(storage: Storage)
+
+    suspend fun saveStorage(storage: Storage)
 
     suspend fun deleteStorage(storage: Storage)
+    suspend fun getSavedStorageId(): String
+    suspend fun getStorageById(id: String): Storage?
 
-    fun getStorageById(id: String): Flow<Storage?>
-
-    fun getStorages(): Flow<List<Storage>>
+    suspend fun getStorages(): List<Storage>
 }

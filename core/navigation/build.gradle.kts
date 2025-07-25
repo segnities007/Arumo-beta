@@ -36,8 +36,10 @@ android {
 
 dependencies {
     implementation(project(":feature:login"))
+    implementation(project(":feature:storage"))
     implementation(project(":core:ui"))
     implementation(project(":domain:model"))
+    implementation(project(":domain:repository"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -55,9 +57,17 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // koin
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+
     // navigation
     implementation(libs.androidx.navigation.compose)
 
     // serialization
     implementation(libs.kotlinx.serialization.json)
+
+    //preference data store
+    implementation(libs.androidx.datastore.preferences)
 }

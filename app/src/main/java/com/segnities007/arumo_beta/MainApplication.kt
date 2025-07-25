@@ -14,7 +14,6 @@ class MainApplication : Application() {
         startKoin {
             // Android ContextをKoinに提供
             androidContext(this@MainApplication)
-
             modules(
                 databaseModule,
                 repositoryModule,

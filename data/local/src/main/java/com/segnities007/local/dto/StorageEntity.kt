@@ -1,5 +1,6 @@
 package com.segnities007.local.dto
 
+import androidx.core.net.toUri
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.segnities007.model.Storage
@@ -16,6 +17,7 @@ data class StorageEntity
         val id: String = "",
         val hostId: String = "",
         val name: String = "",
+        val iconUri: String = "",
         val description: String = "",
         val itemIDsJson: String = "[]", // JSON文字列で保存
         val expenseIDsJson: String = "[]", // JSON文字列で保存
@@ -30,6 +32,7 @@ data class StorageEntity
                 hostId = hostId,
                 name = name,
                 description = description,
+                iconUri = if (iconUri.isNotEmpty()) iconUri.toUri() else null,
                 itemIDs = jsonToIntList(itemIDsJson),
                 expenseIDs = jsonToIntList(expenseIDsJson),
                 editableUserIds = jsonToEditableUserIds(editableUserIdsJson),
@@ -44,6 +47,7 @@ data class StorageEntity
                     id = storage.id,
                     hostId = storage.hostId,
                     name = storage.name,
+                    iconUri = storage.iconUri?.toString() ?: "",
                     description = storage.description,
                     itemIDsJson = intListToJson(storage.itemIDs),
                     expenseIDsJson = intListToJson(storage.expenseIDs),

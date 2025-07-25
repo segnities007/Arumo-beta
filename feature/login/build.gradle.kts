@@ -66,4 +66,7 @@ dependencies {
 
     // coil
     implementation(libs.coil.compose)
+
+    //preference data store
+    implementation(libs.androidx.datastore.preferences)
 }

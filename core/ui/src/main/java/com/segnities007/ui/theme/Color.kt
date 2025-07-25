@@ -12,8 +12,8 @@ val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
-private val lightBlue = Color.Yellow.copy(alpha = 0.2f) // 青を50%の透明度に
-private val lightGreen = Color.Green.copy(alpha = 0.3f) // 緑を50%の透明度に
+private val lightBlue = Color.Yellow.copy(alpha = 0.1f)
+private val lightGreen = Color.Green.copy(alpha = 0.1f)
 
 val backgroundBrush =
     Brush.linearGradient(

@@ -39,6 +39,8 @@ dependencies {
     implementation(project(":data:repository"))
     implementation(project(":domain:repository"))
     implementation(project(":feature:login"))
+    implementation(project(":feature:storage"))
+    implementation(project(":core:navigation"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

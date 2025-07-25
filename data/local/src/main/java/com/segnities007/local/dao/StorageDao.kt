@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface StorageDao {
-    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
-    suspend fun upsert(storage: StorageEntity)
+    @Insert
+    suspend fun create(storage: StorageEntity)
 
     @Delete
     suspend fun delete(storage: StorageEntity)
