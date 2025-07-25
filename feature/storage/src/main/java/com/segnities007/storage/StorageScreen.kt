@@ -69,6 +69,7 @@ private fun StorageUi(
         RowCards(
             modifier = Modifier.align(Alignment.Center),
             storages = storages,
+            onIntent = onIntent,
         )
         FloatingActionButton(
             modifier =

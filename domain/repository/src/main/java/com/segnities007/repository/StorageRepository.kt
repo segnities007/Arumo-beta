@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.Flow
 interface StorageRepository {
     suspend fun createStorage(storage: Storage)
 
+    suspend fun saveStorage(storage: Storage)
+
     suspend fun deleteStorage(storage: Storage)
     suspend fun getSavedStorageId(): String
     suspend fun getStorageById(id: String): Storage?

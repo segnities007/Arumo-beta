@@ -37,6 +37,10 @@ sealed interface StorageIntent : ViewIntent {
     data class DeleteStorage(
         val storage: Storage,
     ) : StorageIntent
+
+    data class SelectStorage(
+        val storage: Storage,
+    ): StorageIntent
 }
 
 sealed interface StorageEffect : ViewEffect {
@@ -63,6 +67,7 @@ class StorageViewModel :
             StorageIntent.GetAllStorages -> getAllStorages()
             is StorageIntent.DeleteStorage -> deleteStorage(intent)
             is StorageIntent.CreateStorage -> createStorage(intent)
+            is StorageIntent.SelectStorage -> selectStorage(intent)
         }
     }
 
@@ -106,5 +111,14 @@ class StorageViewModel :
         }
         _state.value = state.value.copy(state = State.Error("failed to upsert storage"))
         _effect.tryEmit(StorageEffect.ShowToast("ストレージの更新に失敗しました"))
+    }
+
+    private fun selectStorage(intent: StorageIntent.SelectStorage){
+        viewModelScope.launch(Dispatchers.IO) {
+            storageRepository.saveStorage(intent.storage)
+            _effect.emit(StorageEffect.Navigate(Route.Home))
+            return@launch
+        }
+        _state.value = state.value.copy(state = State.Error("failed to select storage"))
     }
 }

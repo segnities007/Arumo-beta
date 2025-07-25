@@ -19,6 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.segnities007.model.Storage
+import com.segnities007.storage.StorageIntent
 import com.segnities007.ui.card.ContiguousImageCard
 
 @SuppressLint("ConfigurationScreenWidthHeight")
@@ -26,6 +27,7 @@ import com.segnities007.ui.card.ContiguousImageCard
 internal fun RowCards(
     modifier: Modifier = Modifier,
     storages: List<Storage>,
+    onIntent: (StorageIntent) -> Unit,
 ) {
     Row(
         modifier = modifier
@@ -36,17 +38,19 @@ internal fun RowCards(
             Column(
                 modifier = Modifier.padding(8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 ContiguousImageCard(
                     uri = storage.iconUri,
-                    size = 128,
-                    onClick = {},
+                    size = 156,
+                    onClick = {
+                        onIntent(StorageIntent.SelectStorage(storage))
+                    },
                 )
                 Text(
                     text = storage.name,
                     textAlign = TextAlign.Center,
-                    fontSize = 36.sp,
+                    fontSize = 20.sp,
                 )
             }
         }

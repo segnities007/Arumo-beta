@@ -37,10 +37,6 @@ class StorageRepositoryImpl(
 
     override suspend fun createStorage(storage: Storage) {
         storageDao.create(StorageEntity.fromModel(storage))
-        val storageIndex = stringPreferencesKey("storage_id")
-        context.dataStorageIdStore.edit { preferences ->
-            preferences[storageIndex] = storage.id
-        }
     }
 
     override suspend fun deleteStorage(storage: Storage) {
@@ -55,5 +51,12 @@ class StorageRepositoryImpl(
     override suspend fun getStorages(): List<Storage> {
         val result = storageDao.getAllStorages()
         return result.map { list -> list.map { it.toModel() } }.first()
+    }
+
+    override suspend fun saveStorage(storage: Storage) {
+        val storageIndex = stringPreferencesKey("storage_id")
+        context.dataStorageIdStore.edit { preferences ->
+            preferences[storageIndex] = storage.id
+        }
     }
 }
