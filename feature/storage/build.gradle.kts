@@ -53,6 +53,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
     // koin
     implementation(libs.koin.core)
     implementation(libs.koin.android)
@@ -60,4 +61,7 @@ dependencies {
 
     // coil
     implementation(libs.coil.compose)
+
+    //preference data store
+    implementation(libs.androidx.datastore.preferences)
 }

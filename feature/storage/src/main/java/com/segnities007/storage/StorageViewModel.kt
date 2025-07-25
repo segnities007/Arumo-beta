@@ -11,11 +11,9 @@ import com.segnities007.model.mvi.ViewState
 import com.segnities007.model.route.Route
 import com.segnities007.repository.StorageRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import kotlin.getValue
 import kotlin.time.ExperimentalTime
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
@@ -74,7 +72,7 @@ class StorageViewModel :
 
     private fun getAllStorages() {
         viewModelScope.launch(Dispatchers.IO) {
-            val storages = storageRepository.getStorages().first()
+            val storages = storageRepository.getStorages()
             _state.value = state.value.copy(storages = storages, state = State.Success)
             return@launch
         }

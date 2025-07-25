@@ -7,6 +7,9 @@ interface UserRepository {
     suspend fun upsertUser(user: User)
 
     suspend fun deleteUser(user: User)
+    suspend fun getSavedUserId(): String
 
-    fun getUser(): Flow<User>
+    suspend fun getUserById(id: String): User?
+
+    suspend fun getUsers(): List<User>
 }

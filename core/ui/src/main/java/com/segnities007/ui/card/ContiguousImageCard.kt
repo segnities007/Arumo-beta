@@ -43,7 +43,6 @@ fun ContiguousImageCard(
         onClick = onClick,
     ) {
         if (uri != null) {
-            Log.d("ContiguousImageCard", "a")
             AsyncImage(
                 modifier =
                     Modifier.fillMaxSize(),
@@ -52,7 +51,6 @@ fun ContiguousImageCard(
                 contentDescription = null,
             )
         } else {
-            Log.d("ContiguousImageCard", "b")
             Image(
                 modifier =
                     Modifier.fillMaxSize(),

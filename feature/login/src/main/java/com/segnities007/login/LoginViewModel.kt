@@ -81,7 +81,7 @@ class LoginViewModel :
 
     private fun signIn(intent: LoginIntent.SignIn) {
         viewModelScope.launch(Dispatchers.IO) {
-            userRepository.getUser().collect {
+            userRepository.getUsers().map {
                 if (it.email == intent.email &&
                     it.password ==
                     intent.password
