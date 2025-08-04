@@ -1,8 +1,6 @@
 ---
 layout: default
 title: Repository Interfaces
-nav_order: 2
-parent: API Reference
 ---
 
 # Repository Interfaces
