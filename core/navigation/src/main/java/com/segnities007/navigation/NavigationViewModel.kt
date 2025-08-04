@@ -1,6 +1,7 @@
 package com.segnities007.navigation
 
 import android.util.Log
+import androidx.compose.runtime.Composable
 import androidx.lifecycle.viewModelScope
 import com.segnities007.model.Storage
 import com.segnities007.model.User
@@ -21,11 +22,17 @@ import kotlin.time.ExperimentalTime
 data class NavigationState @OptIn(ExperimentalTime::class) constructor(
     val user: User = User(),
     val storage: Storage = Storage(),
-    val state: State = State.Idle
+    val topBar: @Composable () -> Unit = {},
+    val bottomBar: @Composable () -> Unit = {},
+    val fab: @Composable () -> Unit = {},
+    val state: State = State.Idle,
 ): ViewState
 
 sealed interface NavigationIntent: ViewIntent{
     data object Init: NavigationIntent
+    data class SetTopBar(val topBar: @Composable () -> Unit): NavigationIntent
+    data class SetBottomBar(val bottomBar: @Composable () -> Unit): NavigationIntent
+    data class SetFab(val fab: @Composable () -> Unit): NavigationIntent
 }
 
 sealed interface NavigationEffect: ViewEffect{
@@ -42,11 +49,23 @@ class NavigationViewModel(
     public override fun handleIntent(intent: NavigationIntent) {
         _state.value = state.value.copy(state = State.Loading)
         when(intent){
-            NavigationIntent.Init -> {
-                navigateUserAndStorageExisting()
-            }
-            else -> {}
+            NavigationIntent.Init -> init()
+            is NavigationIntent.SetBottomBar -> setBottomBar(intent.bottomBar)
+            is NavigationIntent.SetFab -> setFab(intent.fab)
+            is NavigationIntent.SetTopBar -> setTopBar(intent.topBar)
         }
+    }
+
+    private fun setTopBar(topBar: @Composable () -> Unit){
+        _state.value = state.value.copy(topBar = topBar)
+    }
+
+    private fun setBottomBar(bottomBar: @Composable () -> Unit){
+        _state.value = state.value.copy(bottomBar = bottomBar)
+    }
+
+    private fun setFab(fab: @Composable () -> Unit){
+        _state.value = state.value.copy(fab = fab)
     }
 
     private suspend fun getSavedUser(){
@@ -70,21 +89,22 @@ class NavigationViewModel(
             }
     }
 
+    private fun init(){
+        navigateUserAndStorageExisting()
+    }
+
     private fun navigateUserAndStorageExisting(){
         _state.value = state.value.copy(state = State.Loading)
         viewModelScope.launch(Dispatchers.IO){
             getSavedUser()
             getSavedStorage()
             if(state.value.user.id.isNotEmpty() && state.value.storage.id.isNotEmpty()){
-                Log.d("NavigationViewModel", "a")
                 _state.value = state.value.copy(state = State.Success)
                 _effect.emit(NavigationEffect.Navigate(Route.Home))
             }else if(state.value.user.id.isNotEmpty()){
-                Log.d("NavigationViewModel", "b")
                 _state.value = state.value.copy(state = State.Error("Storage not found"))
                 _effect.emit(NavigationEffect.Navigate(Route.Storage))
             }else{
-                Log.d("NavigationViewModel", "c")
                 _state.value = state.value.copy(state = State.Error("User or Storage not found"))
             }
         }

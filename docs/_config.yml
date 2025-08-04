@@ -1,0 +1,51 @@
+title: Arumo-beta API Reference
+description: 消耗品管理アプリArumo-betaのAPIリファレンス
+author: Segnities007
+email: your-email@example.com
+
+# Jekyll theme
+theme: jekyll-theme-cayman
+
+# GitHub Pages settings
+github:
+  is_project_page: true
+  repository_url: https://github.com/segnities007/Arumobeta
+
+# Navigation
+nav_external_links:
+  - title: GitHub Repository
+    url: https://github.com/segnities007/Arumobeta
+
+# Syntax highlighting
+highlighter: rouge
+markdown: kramdown
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Collections
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "default"
+      nav_order: 1
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/ 
