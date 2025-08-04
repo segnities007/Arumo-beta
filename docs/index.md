@@ -141,6 +141,43 @@ val foodItems = itemRepository.getItemsByCategoryFromId(
 )</code></pre>
       </div>
     </div>
+
+    <div class="card">
+      <div class="card-title">
+        <i class="fas fa-cogs"></i>
+        Use Caseの使用
+      </div>
+      <div class="card-content">
+        <pre><code class="language-kotlin">// Use Caseを使用したアイテム追加
+val addItemUseCase = AddItemUseCase(itemRepository)
+val result = addItemUseCase(AddItemUseCase.Params(
+    name = "洗濯洗剤",
+    amount = 500,
+    count = 2,
+    category = ConsumableCategory.CLEANING_LAUNDRY
+))
+
+result.fold(
+    onSuccess = { /* 成功処理 */ },
+    onFailure = { error -> /* エラー処理 */ }
+)</code></pre>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <i class="fas fa-route"></i>
+        画面遷移
+      </div>
+      <div class="card-content">
+        <pre><code class="language-kotlin">// 画面遷移の実装
+navController.navigate(Route.Home)
+navController.navigate(Route.Storage)
+
+// パラメータ付き画面遷移
+navController.navigate(Route.ItemDetail(itemId = 1))</code></pre>
+      </div>
+    </div>
   </div>
 
   <div class="section fade-in-up">
@@ -206,6 +243,53 @@ val foodItems = itemRepository.getItemsByCategoryFromId(
           </a>
         </div>
       </div>
+      
+      <div class="card">
+        <div class="card-title">
+          <span class="badge badge-secondary">Business Logic</span>
+          <i class="fas fa-cogs"></i>
+          Use Cases
+        </div>
+        <div class="card-content">
+          <p>ビジネスロジックとUse Case層の実装</p>
+          <a href="use-cases.html" class="btn btn-primary">
+            <i class="fas fa-arrow-right"></i>
+            詳細を見る
+          </a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-title">
+          <span class="badge badge-accent">Navigation</span>
+          <i class="fas fa-route"></i>
+          Navigation
+        </div>
+        <div class="card-content">
+          <p>画面遷移とナビゲーションシステム</p>
+          <a href="navigation.html" class="btn btn-primary">
+            <i class="fas fa-arrow-right"></i>
+            詳細を見る
+          </a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-title">
+          <span class="badge badge-primary">Database</span>
+          <i class="fas fa-database"></i>
+          Database
+        </div>
+        <div class="card-content">
+          <p>RoomデータベースとEntity設計</p>
+          <a href="database.html" class="btn btn-primary">
+            <i class="fas fa-arrow-right"></i>
+            詳細を見る
+          </a>
+        </div>
+      </div>
+      
+
     </div>
   </div>
 
@@ -219,7 +303,7 @@ val foodItems = itemRepository.getItemsByCategoryFromId(
           言語
         </div>
         <div class="card-content">
-          <span class="badge badge-primary">Kotlin</span>
+          <span class="badge badge-primary">Kotlin 1.9+</span>
         </div>
       </div>
       
@@ -230,6 +314,7 @@ val foodItems = itemRepository.getItemsByCategoryFromId(
         </div>
         <div class="card-content">
           <span class="badge badge-secondary">Jetpack Compose</span>
+          <span class="badge badge-secondary">Material 3</span>
         </div>
       </div>
       
@@ -240,7 +325,7 @@ val foodItems = itemRepository.getItemsByCategoryFromId(
         </div>
         <div class="card-content">
           <span class="badge badge-accent">Clean Architecture</span>
-          <span class="badge badge-accent">MVI</span>
+          <span class="badge badge-accent">MVI Pattern</span>
         </div>
       </div>
       
@@ -250,7 +335,8 @@ val foodItems = itemRepository.getItemsByCategoryFromId(
           データベース
         </div>
         <div class="card-content">
-          <span class="badge badge-primary">Room</span>
+          <span class="badge badge-primary">Room 2.6+</span>
+          <span class="badge badge-primary">SQLite</span>
         </div>
       </div>
       
@@ -262,6 +348,7 @@ val foodItems = itemRepository.getItemsByCategoryFromId(
         <div class="card-content">
           <span class="badge badge-secondary">Coroutines</span>
           <span class="badge badge-secondary">Flow</span>
+          <span class="badge badge-secondary">StateFlow</span>
         </div>
       </div>
       
@@ -271,7 +358,28 @@ val foodItems = itemRepository.getItemsByCategoryFromId(
           依存性注入
         </div>
         <div class="card-content">
-          <span class="badge badge-accent">Koin</span>
+          <span class="badge badge-accent">Koin 3.5+</span>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-title">
+          <i class="fas fa-route"></i>
+          ナビゲーション
+        </div>
+        <div class="card-content">
+          <span class="badge badge-primary">Compose Navigation</span>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-title">
+          <i class="fas fa-test-tube"></i>
+          テスト
+        </div>
+        <div class="card-content">
+          <span class="badge badge-secondary">JUnit 5</span>
+          <span class="badge badge-secondary">MockK</span>
         </div>
       </div>
     </div>

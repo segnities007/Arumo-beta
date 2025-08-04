@@ -2,19 +2,15 @@ title: Arumo-beta API Reference
 description: 消耗品管理アプリArumo-betaのAPIリファレンス
 author: Segnities007
 
-# Jekyll theme - より美しいテーマに変更
+# Jekyll theme - カスタムテーマを使用
 theme: jekyll-theme-minimal
 
-# Syntax highlighting
-highlighter: rouge
-markdown: kramdown
-
-# カスタムCSSとJS
+# カスタムCSSとJSの設定
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
-# カスタムCSSファイル
+# カスタムCSSファイルの設定
 sass:
   load_paths:
     - _sass
@@ -31,9 +27,15 @@ nav_external_links:
   - title: Download App
     url: https://play.google.com/store/apps/details?id=com.segnities007.arumo_beta
 
-# Exclude from processing
+# カスタムレイアウトの設定
+layouts_dir: _layouts
+includes_dir: _includes
+
+# 除外ファイル
 exclude:
   - Gemfile
   - Gemfile.lock
   - node_modules
-  - vendor/ 
+  - vendor/
+  - README.md
+  - API_REFERENCE.md 
