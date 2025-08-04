@@ -1,6 +1,5 @@
 package com.segnities007.navigation
 
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,10 +10,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.segnities007.home.HomeScreen
 import com.segnities007.login.LoginScreen
 import com.segnities007.model.route.Route
 import com.segnities007.storage.StorageScreen
@@ -27,25 +26,39 @@ fun Navigation() {
     val navController = rememberNavController()
     val navigationViewModel: NavigationViewModel = koinViewModel()
     val state by navigationViewModel.state.collectAsState()
-    val effect by navigationViewModel.effect.collectAsState(initial = null)
+
+    val setTopBar: (@Composable () -> Unit) -> Unit = {
+        navigationViewModel.handleIntent(NavigationIntent.SetTopBar(it))
+    }
+    val setBottomBar: (@Composable () -> Unit) -> Unit = {
+        navigationViewModel.handleIntent(NavigationIntent.SetBottomBar(it))
+    }
+    val setFab: (@Composable () -> Unit) -> Unit = {
+        navigationViewModel.handleIntent(NavigationIntent.SetFab(it))
+    }
 
     LaunchedEffect(Unit) {
         navigationViewModel.handleIntent(NavigationIntent.Init)
     }
 
-    LaunchedEffect(effect){
-        when(effect){
-            is NavigationEffect.Navigate -> {
-                navController.navigate((effect as NavigationEffect.Navigate).route)
+    LaunchedEffect(Unit){
+        navigationViewModel.effect.collect{ effect ->
+            when(effect){
+                is NavigationEffect.Navigate -> {
+                    navController.navigate(effect.route)
+                }
+                is NavigationEffect.ShowToast -> {
+                    //TODO
+                }
             }
-            is NavigationEffect.ShowToast -> {
-                //TODO
-            }
-            null -> { /*Nothing*/ }
         }
     }
 
-    NavUi {
+    NavUi(
+        topBar = state.topBar,
+        bottomBar = state.bottomBar,
+        fab = state.fab,
+    ){
         NavHost(navController = navController, startDestination = Route.Login) {
             composable<Route.Login> {
                 LoginScreen(
@@ -60,6 +73,11 @@ fun Navigation() {
                 )
             }
             composable<Route.Home> {
+                HomeScreen(
+                    setTopBar = setTopBar,
+                    setBottomBar = setBottomBar,
+                    setFab = setFab,
+                )
             }
             composable<Route.Search> {
             }
@@ -72,8 +90,17 @@ fun Navigation() {
 }
 
 @Composable
-private fun NavUi(content: @Composable () -> Unit) {
-    Scaffold {
+private fun NavUi(
+    topBar: @Composable () -> Unit,
+    bottomBar: @Composable () -> Unit,
+    fab: @Composable () -> Unit,
+    content: @Composable () -> Unit
+) {
+    Scaffold(
+        topBar = topBar,
+        bottomBar = bottomBar,
+        floatingActionButton = fab,
+    ){
         Box(
             modifier =
                 Modifier

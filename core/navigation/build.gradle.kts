@@ -37,6 +37,9 @@ android {
 dependencies {
     implementation(project(":feature:login"))
     implementation(project(":feature:storage"))
+    implementation(project(":feature:setting"))
+    implementation(project(":feature:search"))
+    implementation(project(":feature:home"))
     implementation(project(":core:ui"))
     implementation(project(":domain:model"))
     implementation(project(":domain:repository"))

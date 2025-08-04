@@ -6,4 +6,6 @@ plugins {
     alias(libs.plugins.android.library) apply false
     id("com.google.devtools.ksp") version "2.2.0-2.0.2" apply false
     kotlin("plugin.serialization") version "2.2.0"
+    alias(libs.plugins.kotlin.multiplatform) apply false
+    alias(libs.plugins.android.kotlin.multiplatform.library) apply false
 }
