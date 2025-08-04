@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - Arumo-beta API Reference</title>
+    <meta name="description" content="消耗品管理アプリArumo-betaのAPIリファレンス">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Prism.js for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ page.title }} - Arumo-beta API Reference">
+    <meta property="og:description" content="消耗品管理アプリArumo-betaのAPIリファレンス">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page.title }} - Arumo-beta API Reference">
+    <meta name="twitter:description" content="消耗品管理アプリArumo-betaのAPIリファレンス">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="{{ '/' | relative_url }}">
+                    <i class="fas fa-rocket"></i>
+                    Arumo-beta
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="{{ '/' | relative_url }}" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+                <a href="{{ '/repository-interfaces.html' | relative_url }}" class="nav-link">
+                    <i class="fas fa-code"></i>
+                    API
+                </a>
+                <a href="https://github.com/segnities007/Arumobeta" class="nav-link" target="_blank">
+                    <i class="fab fa-github"></i>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {{ content }}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Arumo-beta API Reference</h3>
+                <p>消耗品管理アプリの包括的なAPIドキュメント</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links</h4>
+                <ul>
+                    <li><a href="https://github.com/segnities007/Arumobeta">GitHub Repository</a></li>
+                    <li><a href="https://github.com/segnities007">Developer Profile</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Technology</h4>
+                <ul>
+                    <li>Kotlin</li>
+                    <li>Jetpack Compose</li>
+                    <li>Clean Architecture</li>
+                    <li>Room Database</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Arumo-beta. MIT License.</p>
+        </div>
+    </footer>
+
+    <!-- Prism.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // ナビゲーションのアクティブ状態
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // スムーズスクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // コードブロックのコピーボタン
+        document.querySelectorAll('pre').forEach(pre => {
+            const button = document.createElement('button');
+            button.className = 'copy-button';
+            button.innerHTML = '<i class="fas fa-copy"></i>';
+            button.title = 'Copy code';
+            
+            button.addEventListener('click', async () => {
+                const code = pre.querySelector('code');
+                if (code) {
+                    try {
+                        await navigator.clipboard.writeText(code.textContent);
+                        button.innerHTML = '<i class="fas fa-check"></i>';
+                        setTimeout(() => {
+                            button.innerHTML = '<i class="fas fa-copy"></i>';
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Failed to copy code:', err);
+                    }
+                }
+            });
+            
+            pre.style.position = 'relative';
+            pre.appendChild(button);
+        });
+
+        // ダークモードトグル
+        const darkModeToggle = document.createElement('button');
+        darkModeToggle.className = 'dark-mode-toggle';
+        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        darkModeToggle.title = 'Toggle dark mode';
+        
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = darkModeToggle.querySelector('i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        });
+        
+        document.querySelector('.nav-menu').appendChild(darkModeToggle);
+    </script>
+</body>
+</html> 
