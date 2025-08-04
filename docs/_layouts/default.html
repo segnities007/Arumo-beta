@@ -32,65 +32,89 @@
     <meta name="twitter:description" content="消耗品管理アプリArumo-betaのAPIリファレンス">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <a href="{{ '/' | relative_url }}">
-                    <i class="fas fa-rocket"></i>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <a href="{{ '/' | relative_url }}" class="logo">
+                    <div class="logo-icon">A</div>
                     Arumo-beta
                 </a>
             </div>
-            <div class="nav-menu">
-                <a href="{{ '/' | relative_url }}" class="nav-link">
-                    <i class="fas fa-home"></i>
-                    Home
-                </a>
-                <a href="{{ '/repository-interfaces.html' | relative_url }}" class="nav-link">
-                    <i class="fas fa-code"></i>
-                    API
-                </a>
-                <a href="https://github.com/segnities007/Arumobeta" class="nav-link" target="_blank">
-                    <i class="fab fa-github"></i>
-                    GitHub
-                </a>
-            </div>
-        </div>
-    </nav>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Getting Started</div>
+                    <a href="{{ '/' | relative_url }}" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        Introduction
+                    </a>
+                    <a href="{{ '/quick-start.html' | relative_url }}" class="nav-item">
+                        <i class="fas fa-rocket"></i>
+                        Quick Start
+                    </a>
+                    <a href="{{ '/installation.html' | relative_url }}" class="nav-item">
+                        <i class="fas fa-download"></i>
+                        Installation
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">API Reference</div>
+                    <a href="{{ '/repository-interfaces.html' | relative_url }}" class="nav-item">
+                        <i class="fas fa-code"></i>
+                        Repository Interfaces
+                    </a>
+                    <a href="{{ '/data-models.html' | relative_url }}" class="nav-item">
+                        <i class="fas fa-database"></i>
+                        Data Models
+                    </a>
+                    <a href="{{ '/enums.html' | relative_url }}" class="nav-item">
+                        <i class="fas fa-list"></i>
+                        Enums
+                    </a>
+                    <a href="{{ '/mvi-architecture.html' | relative_url }}" class="nav-item">
+                        <i class="fas fa-sitemap"></i>
+                        MVI Architecture
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Examples</div>
+                    <a href="{{ '/examples.html' | relative_url }}" class="nav-item">
+                        <i class="fas fa-lightbulb"></i>
+                        Code Examples
+                    </a>
+                    <a href="{{ '/tutorials.html' | relative_url }}" class="nav-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        Tutorials
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">Resources</div>
+                    <a href="https://github.com/segnities007/Arumobeta" class="nav-item" target="_blank">
+                        <i class="fab fa-github"></i>
+                        GitHub Repository
+                    </a>
+                    <a href="https://github.com/segnities007" class="nav-item" target="_blank">
+                        <i class="fas fa-user"></i>
+                        Developer Profile
+                    </a>
+                </div>
+            </nav>
+        </aside>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        {{ content }}
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Arumo-beta API Reference</h3>
-                <p>消耗品管理アプリの包括的なAPIドキュメント</p>
-            </div>
-            <div class="footer-section">
-                <h4>Links</h4>
-                <ul>
-                    <li><a href="https://github.com/segnities007/Arumobeta">GitHub Repository</a></li>
-                    <li><a href="https://github.com/segnities007">Developer Profile</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Technology</h4>
-                <ul>
-                    <li>Kotlin</li>
-                    <li>Jetpack Compose</li>
-                    <li>Clean Architecture</li>
-                    <li>Room Database</li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Arumo-beta. MIT License.</p>
-        </div>
-    </footer>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            {{ content }}
+        </main>
+    </div>
 
     <!-- Prism.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
@@ -98,14 +122,30 @@
     
     <!-- Custom JS -->
     <script>
+        // モバイルメニュートグル
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const sidebar = document.getElementById('sidebar');
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+        
+        // サイドバー外クリックでメニューを閉じる
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                sidebar.classList.remove('open');
+            }
+        });
+        
         // ナビゲーションのアクティブ状態
         document.addEventListener('DOMContentLoaded', function() {
             const currentPath = window.location.pathname;
-            const navLinks = document.querySelectorAll('.nav-link');
+            const navItems = document.querySelectorAll('.nav-item');
             
-            navLinks.forEach(link => {
-                if (link.getAttribute('href') === currentPath) {
-                    link.classList.add('active');
+            navItems.forEach(item => {
+                const href = item.getAttribute('href');
+                if (href && (href === currentPath || (currentPath === '/' && href === '/index.html'))) {
+                    item.classList.add('active');
                 }
             });
         });
@@ -166,7 +206,33 @@
             }
         });
         
-        document.querySelector('.nav-menu').appendChild(darkModeToggle);
+        // ダークモードトグルをサイドバーに追加
+        const sidebarNav = document.querySelector('.sidebar-nav');
+        const darkModeSection = document.createElement('div');
+        darkModeSection.className = 'nav-section';
+        darkModeSection.innerHTML = `
+            <div class="nav-section-title">Theme</div>
+            <div class="nav-item" style="cursor: pointer;">
+                <i class="fas fa-moon"></i>
+                <span>Dark Mode</span>
+            </div>
+        `;
+        sidebarNav.appendChild(darkModeSection);
+        
+        // ダークモードトグルイベント
+        const darkModeItem = darkModeSection.querySelector('.nav-item');
+        darkModeItem.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = darkModeItem.querySelector('i');
+            const text = darkModeItem.querySelector('span');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.className = 'fas fa-sun';
+                text.textContent = 'Light Mode';
+            } else {
+                icon.className = 'fas fa-moon';
+                text.textContent = 'Dark Mode';
+            }
+        });
     </script>
 </body>
 </html> 
